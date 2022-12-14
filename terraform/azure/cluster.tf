@@ -1,5 +1,5 @@
 locals {
-  name = "${var.name_prefix}-${random_string.suffix.id}"
+  name = "${var.name_prefix}-${random_string.suffix.result}"
   tags = {
     Environment = "Test"
   }
@@ -41,7 +41,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   name                = local.name
   resource_group_name = azurerm_resource_group.main.name
   dns_prefix          = local.name
-  kubernetes_version = "1.24"
+  kubernetes_version = var.kubernetes_version
   tags                = local.tags
 
   public_network_access_enabled   = true
@@ -62,7 +62,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   identity {
-    type = "UserAssigned"
+    type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.aks_identity.id]
   }
 }

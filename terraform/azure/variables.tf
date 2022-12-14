@@ -11,3 +11,7 @@ variable "location" {
 variable "node_count" {
   default = 2
 }
+
+variable "kubernetes_version" {
+  default = "1.24"
+}
