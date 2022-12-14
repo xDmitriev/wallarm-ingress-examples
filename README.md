@@ -24,4 +24,9 @@ echo "Load Balancer IP: ${LB_IP}"
 curl -H "Host: myapp.com" ${LB_IP}/get
 curl -H "Host: myapp.com" ${LB_IP}/'?q=union+select+1'
 ``` 
-Test is successfully done if last request get `403 Forbidden` response 
+Test is successfully done if last request get `403 Forbidden` response
+
+8. Cleanup resources
+```
+terraform destroy
+```
