@@ -1,0 +1,13 @@
+# This values file is for Helm chart of external Nginx Ingress controller
+controller:
+  ingressClass: nginx
+  ingressClassResource:
+    name: nginx
+    default: false
+    enabled: true
+    controllerValue: "k8s.io/ingress-nginx"
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+
+nameOverride: nginx-ingress

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-external
+  # Must be the namespace where Helm chart of Wallarm Ingress Controller is installed
+  namespace: wallarm-ingress
+
+spec:
+  # Default Ingress class used by Community Ingress Controller
+  ingressClassName: nginx
+  rules:
+    - host: myapp.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                # The name of wallarm ingress controller service, depends on Helm release name and .Values.nameOverride
+                # Execute this command to get the name: kubectl get svc -l "app.kubernetes.io/component=controller" -n wallarm-ingress -o=jsonpath='{.items[0].metadata.name}'
+                name: internal-ingress-wallarm-ingress-controller
+                port:
+                  number: 80

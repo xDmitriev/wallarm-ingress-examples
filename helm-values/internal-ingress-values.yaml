@@ -1,0 +1,18 @@
+# This values file is for Helm chart of internal Wallarm Ingress controller
+controller:
+  wallarm:
+    enabled: true
+    token: <WALLARM_API_TOKEN>
+    apiHost: api.wallarm.com
+  config:
+    use-forwarded-headers: "true"
+  ingressClass: wallarm-ingress
+  ingressClassResource:
+    name: wallarm-ingress
+    default: false
+    enabled: true
+    controllerValue: "k8s.io/wallarm-ingress"
+  service:
+    type: ClusterIP
+
+nameOverride: wallarm-ingress

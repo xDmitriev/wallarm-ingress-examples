@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/wallarm-application: "1"
+    nginx.ingress.kubernetes.io/wallarm-mode: block
+  name: myapp-internal
+  # Must be the namespace where your application is deployed
+  namespace: myapp
+spec:
+  ingressClassName: wallarm-ingress
+  rules:
+    - host: myapp.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp
+                port:
+                  number: 80
+
