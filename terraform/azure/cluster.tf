@@ -45,8 +45,10 @@ resource "azurerm_kubernetes_cluster" "aks" {
   tags                = local.tags
 
   public_network_access_enabled   = true
-  api_server_authorized_ip_ranges = ["0.0.0.0/0"]
 
+  api_server_access_profile {
+    authorized_ip_ranges = ["0.0.0.0/0"]
+  }
 
   default_node_pool {
     name       = "defaultpool"
