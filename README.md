@@ -10,12 +10,8 @@ terraform apply
 ```
 5. Get cluster config
 ```
-CLUSTER_NAME=$(terraform output -raw cluster_name)
-echo "Cluster name: ${CLUSTER_NAME}"
-RG_NAME=$(terraform output -raw rg_name)
-echo "Resource group name: ${RG_NAME}"
 az account set --subscription ef8d68e3-3507-49d5-8672-194c86853309
-az aks get-credentials --admin --name "${CLUSTER_NAME}" --resource-group "${RG_NAME}"
+az aks get-credentials --admin --name $(terraform output -raw cluster_name) --resource-group $(terraform output -raw rg_name)
 ```
 6. Perform test
 ```
